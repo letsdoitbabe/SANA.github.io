@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be Mine?</title>
+    <style>
+        body {
+            background-image: url('https://joelandamberphotography.com/wp-content/uploads/2022/03/Surprise-Sunset-Proposal-at-The-Ledges-Wedding-Photographer-Huntsville-Alabama_3159.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Box with 10% opacity */
+        .text-box {
+            background-color: rgba(255, 255, 255, 0.1); /* 10% opacity */
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: none; /* Removed shadow */
+            position: relative;
+            z-index: 1; /* Ensure it's above background */
+            opacity: 0; /* Initially hidden */
+            transition: opacity 2s ease;
+        }
+
+        h1 {
+            font-size: 36px;
+            color: #D81B60;
+        }
+
+        h2 {
+            font-size: 32px;
+            color: red;
+        }
+
+        p {
+            font-size: 24px;
+            color: #D81B60;
+        }
+
+        .button-container {
+            margin-top: 20px;
+        }
+
+        button {
+            background-color: #D81B60;
+            color: white;
+            padding: 15px 30px;
+            font-size: 20px;
+            border: none;
+            border-radius: 80px;
+            cursor: pointer;
+            margin: 0 10px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        button:hover {
+            background-color: #C2185B;
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        /* Yes animation moving upwards and increasing size */
+        .yes-animation {
+            position: absolute;
+            font-size: 24px;
+            color: #D81B60;
+            opacity: 0;
+            animation: moveUpYes 3s forwards;
+        }
+
+        @keyframes moveUpYes {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-150px) scale(1.5);
+            }
+        }
+
+        /* Multiple Heart animation moving upwards and bursting */
+        .heart-animation {
+            position: absolute;
+            font-size: 36px;
+            color: #D81B60;
+            opacity: 0;
+            animation: moveUpHeart 5s forwards;
+        }
+
+        @keyframes moveUpHeart {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            80% {
+                opacity: 1;
+                transform: translateY(-200px) scale(2);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-250px) scale(3);
+            }
+        }
+
+        /* Curtain styles */
+        .curtain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://i.pinimg.com/736x/f5/0b/6f/f50b6f22f68fa58ea202cb488ec78cb2.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2;
+            transition: transform 3s ease, border-radius 3s ease;
+            transform: translateY(0);
+            border-radius: 0;
+            opacity: 1;
+        }
+
+        .curtain.hidden {
+            transform: translateY(-100%);
+            border-radius: 50% 50% 0 0;
+        }
+
+        .curtain-message {
+            color: rgb(246, 8, 8);
+            font-size: 76px;
+            margin-bottom: 20px;
+            font-family: cursive;
+        }
+
+        .curtain button {
+            background-color: #e7f65b;
+            color: rgb(250, 15, 191);
+            padding: 10px 30px;
+            font-size: 30px;
+            border: none;
+            border-radius: 80px;
+            cursor: pointer;
+        }
+
+        .watermark {
+            position: absolute;
+            top: 10px;
+            left: 10;
+            width: 10%;
+            height: 10%;
+            z-index: -1; /* Positioned behind everything */
+            font-size: 30px; /* Adjust size as necessary */
+            color: rgba(216, 27, 96, 0.5); /* Light, dark pink color with opacity */
+            transform: rotate(0deg); /* 45-degree tilt */
+            white-space: nowrap;
+            pointer-events: none; /* Prevent interaction with other elements */
+            text-align: ;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-repeat: repeat;
+            background-position: center;
+            content: "";
+        }
+
+        .by-name {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            font-size: 18px;
+            color: #D81B60;
+            font-family: 'Arial', sans-serif;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- Curtain element covering the content -->
+    <div class="curtain" id="curtain">
+        <div>
+            <div class="curtain-message">Are you sure?</div>
+            <button onclick="openCurtain()">Sure🥰</button>
+        </div>
+    </div>
+
+    <!-- Text box with 10% opacity -->
+    <div class="text-box" id="content">
+        <h1>Will You Be Mine?</h1>
+        <h2>I found the reason for my smile the day I found you. Will you let me be the reason for your smile? Will you be my forever?</h2>
+        <div class="button-container">
+            <button id="yesButton" onclick="animateHearts(this)">Yes</button>
+            <button id="noButton" onclick="animateYes(this)">No</button>
+        </div>
+    </div>
+
+    <!-- Watermark added, now covering the full page -->
+    <div class="watermark">💖SANA💖</div>
+
+    <!-- Message "by name" positioned at the bottom-right corner -->
+    <div class="by-name">~xyz</div>
+
+    <script>
+        function openCurtain() {
+            document.getElementById('curtain').classList.add('hidden');
+            document.getElementById('content').style.opacity = '1'; // Reveal content
+        }
+    
+        // Reusable animation logic for the "Yes" button
+        function animateText(button, text, className, animationClass, count = 5) {
+            const rect = button.getBoundingClientRect();
+            for (let i = 0; i < count; i++) {
+                const animatedText = document.createElement('span');
+                animatedText.innerText = text;
+                animatedText.classList.add(className);
+                animatedText.style.left = `${rect.left + rect.width / 2 - 12}px`;
+                animatedText.style.top = `${rect.top}px`;
+                animatedText.style.animationDelay = `${i * 0.2}s`;
+                document.body.appendChild(animatedText);
+                animatedText.addEventListener('animationend', () => animatedText.remove());
+            }
+        }
+    
+        function animateYes(button) {
+            animateText(button, "Yes", 'yes-animation', 'moveUpYes');
+        }
+    
+        function animateHearts(button) {
+            const rect = button.getBoundingClientRect();
+            for (let i = 0; i < 10; i++) {
+                const heart = document.createElement('span');
+                heart.innerText = "❤";
+                heart.classList.add('heart-animation');
+                heart.style.left = `${rect.left + rect.width / 2 - 18 + (Math.random() * 40 - 20)}px`;
+                heart.style.top = `${rect.top}px`;
+                heart.style.animationDelay = `${i * 0.2}s`;
+                document.body.appendChild(heart);
+                heart.addEventListener('animationend', () => heart.remove());
+            }
+            setTimeout(() => window.location.href = "https://t.me/Sach_yoo", 3000);
+        }
+    </script>
+    
+</body>
+</html>
